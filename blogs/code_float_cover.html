@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Float元素对文档流的覆盖表现</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s6.qhimg.com/!d2db457d/shBrushXml.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<script src="http://s0.qhimg.com/!5af03491/shBrushCss.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			text-indent: 2em;
+		}
+		.code-hightlight {
+			padding-left: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>Float元素对文档流的覆盖表现</h1>
+		</div>
+		<p>首先，大家都知道，浮动的元素居于上层（低于定位层），是会覆盖之后的正常文档流的块级元素。</p>
+		<div class="code-hightlight">
+			<pre class="brush: html">
+				<div class="float wh_200_200 blue">
+					<div class="float wh_100_100 red"></div>
+					<div class="yellow wh_150_150"></div>
+				</div>
+			</pre>
+			<pre class="brush: css">
+				.float{float:left;}
+				.red {background:red;}
+				.blue {background:blue;}
+				.yellow {background:yellow;}
+			</pre>
+		</div>
+		<p><img src="http://p5.qhimg.com/d/inn/10644ef6/float_cover_1.jpg" alt=""></p>
+		<p>但是，文档流中的行内元素(包括块级元素内的行内元素)并不会被覆盖，比如：</p>
+		<div class="code-hightlight">
+			<pre class="brush: html">
+				<div class="float wh_200_200 blue">
+					<div class="float wh_100_100 red"></div>
+					<a class="yellow">锚标签并没有被覆盖</a>
+				</div>
+			</pre>
+		</div>
+		<p><img src="img/float_cover_2.jpg" alt=""></p>
+		<p>更为特别的是，table这个块级元素，并不会遵守第一条规则，它表现为一个不会被覆盖的行内元素：</p>
+		<div class="code-hightlight">
+			<pre class="brush: html">
+				<div class="float wh_200_200 blue">
+					<div class="float wh_100_100 red"></div>
+					<table class="yellow wh_100_100"></table>
+				</div>
+			</pre>
+		</div>
+		<p><img src="img/float_cover_3.jpg" alt=""></p>
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
