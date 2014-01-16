@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Node.js刷360搜索红包</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			
+			text-indent: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>Node.js刷360搜索红包</h1>
+		</div>
+		<p>2014年1月16日，下午，360搜索过年红包上线。</p>
+		<p>学着付坤，用Node.js写了一个刷票程序。贴几行主要的代码出来：</p>
+		<div class="code-hightlight">
+			<pre class="brush: js">
+			var opt = {
+				host: 'localhost',
+				port: 8087,
+				path:'http://hongbao.so.com/api/getALottery?callback=cb&bcode=&r=1389851514266',//这里是访问的路径
+			}
+
+			setInterval(function(){
+				http.get(opt, function(res) {
+				  res.setEncoding('utf8');
+				  res.on('data', function (chunk) {
+				  	if(/^ cb/.test(chunk)){
+				    	eval(chunk);
+					}else{
+						console.log(chunk);
+					}
+				  });
+				});
+			}, 100);
+			</pre>
+		</div>
+		<p>主要用到了Node.js的HTTP模块提供的get方法发起http请求。值得注意的是,当在opt的path中加入主机的时候，这个http请求就会走host和port相对应的代理。这样即使抽奖网站对内网ip做了过滤，也可以通过goagent做代理来刷奖。</p>
+		<p>另外，logThis方法将筛选出来的有用的获奖信息记录到了res.txt文件中</p>
+		<div class="code-hightlight">
+			<pre class="brush: js">
+			function logThis(str){
+				fs.writeFile('res.txt', str, function(err){
+					if(err) throw err;
+					console.log('It\'s saved!');
+				});
+			}
+			</pre>
+		</div>
+		<p>代码很简单，不过这次体验让我很快的了解了Node.js的趣味性。</p>
+		<p>总结一下，之所以能够刷奖，全是因为getALottery接口是开放的。并没有让用户先登录再抽奖。尽管这样能增进用户体验，但是却成为了漏洞的根源。</p>
+		<ul>
+			<li>1、写程序循环向该接口发送http请求</li>
+			<li>2、筛选返回结果，将中奖结果存在本地文件</li>
+			<li>3、使用Fiddler将这个接口的请求代理到某个存有获奖信息的本地文件</li>
+			<li>4、再登陆抽奖网站，抽奖的时候就会返回本地的这个获奖数据，然后领奖就行了</li>
+		</ul>
+		<p>现在鹏伟和新仔又在将网站改成根据qid判别，需要用户先登录的策略。这就是开发伊始没有做好方案评估的结果，导致通宵做无用功。</p>
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
