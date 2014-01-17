@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>文字导航遇到的两个IE兼容问题</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s6.qhimg.com/!d2db457d/shBrushXml.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<script src="http://s0.qhimg.com/!5af03491/shBrushCss.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			text-indent: 2em;
+		}
+		.code-hightlight {
+			padding-left: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>文字导航遇到的两个IE兼容问题</h1>
+		</div>
+		<p>2014年1月17日，旅游频道首页提测，遇到两个IE兼容性的小Bug。特此记录一下，以后就不用花那么多时间纠结了。</p>
+		<p>1、第一个是display:inline-block的元素间会有空白间隙。</p>
+		<p>原因是：在代码中标签的换行会转成空白符，而这个空白符则会继承父元素的font-size，就占了相应大小的地方了。</p>
+		<p>所以解决方法是：在父元素中加入font-size:0;然后再子元素中加上font-size各自的。另外子元素中别忘了*display:inline;和*zoom:1;</p>
+		<p>这样，那个空白符继承的font-size就是0了，就不会占地方了。更详细的可以参考<a href="http://www.yuanchuang.net/content/12710.html">《浅谈inlineblock及解决空白间距》</a></p>
+		<p>2、第二个问题是，使用jQuery计算first-child的最大宽度时，在ie6中会有一点奇葩的问题。就是有些first-child算了，有些却没算。跟益国交流后也没有找出原因。最后使用white-space:nowrap;强制不换行解决了问题。</p>
+		<p>更多white-space属性，见<a href="http://www.w3school.com.cn/css/pr_text_white-space.asp">CSS white-space 属性</a></p>
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
