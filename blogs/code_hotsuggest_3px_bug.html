@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>图搜hotSuggest的IE3像素Bug</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s6.qhimg.com/!d2db457d/shBrushXml.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<script src="http://s0.qhimg.com/!5af03491/shBrushCss.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			text-indent: 2em;
+		}
+		.code-hightlight {
+			padding-left: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>图搜hotSuggest的IE3像素Bug</h1>
+		</div>
+		<p>2014年1月20日，下午在改图搜hotSuggest一个重叠bug的时候遇到了经典的IE3像素问题。</p>
+		<p><img src="img/3px_bug_1.jpg" alt="hotSuggest一个重叠bug"></p>
+		<p>所谓IE3像素Bug，就是当浮动元素与非浮动元素相邻的时候，在IE6、7下会出现3个像素的空隙。</p>
+		<p><img src="img/3px_bug_2.jpg" alt="hotSuggest一个重叠bug"></p>
+		<p>在这里li是非浮动元素，而其中的有两个浮动的span元素，这样就造成了每个li之间有3个像素的空隙</p>
+		<p>而相应的解决方法就是，*margin-bottom:-3px;来让间隔元素偏移会对的位置。</p>
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>

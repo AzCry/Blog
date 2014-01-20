@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Float元素对文档流的覆盖表现</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s6.qhimg.com/!d2db457d/shBrushXml.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<script src="http://s0.qhimg.com/!5af03491/shBrushCss.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			text-indent: 2em;
+		}
+		.code-hightlight {
+			padding-left: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>清除浮动的常用方法</h1>
+		</div>
+		<p>2014年1月20日，研究浮动清除方法</p>
+		<p>清除浮动的方法有很多，这里只列举两种常用的。更多方法请见<a href="http://hi.baidu.com/kongcheng2012/item/2b1250d4452e802538f6f705">这里</a>的总结。</p>
+		<p>第一种方法过去常用，就是在父元素最后加一个clear:both;的空元素。因为比较常见，所以就不贴代码了</p>
+		<p>第二种方法现在较为流行，代码如下：</p>
+		<div class="code-hightlight">
+			<pre class="brush: html">
+				<style type="text/css">
+				div.item {border: 1px solid; padding: 5px;}
+				div.item img {float: left; margin: 5px;}
+
+				.clearfix{zoom:1;}
+				.clearfix:after{
+				    content:'.';
+				    clear:both;
+				    display:block; 
+				    height:0; 
+				    visibility: hidden;
+				}
+				</style>
+
+				<div class="item clearfix"><img width="50px" height="50px" src="test.jpg" alt="">Some Text</div>
+				<div class="item clearfix"><img width="50px" height="50px" src="test.jpg" alt="">Some Text</div>
+			</pre>
+		</div>
+		<p>其实原理上和第一种方法类似，只不过使用了:after来代替空标签。但是:after只在IE8以上和非IE浏览器支持，所以这里用zoom:1的方法，激活IE6、IE7的hasLayout属性，从而让父元素能够被浮动的子元素扩充出去。</p>
+		<p>PS:关于浮动突出的来源可以参考<a href="http://www.complexspiral.com/publications/containing-floats/#fn1">这篇文章。</a></p>
+		<p>有关hasLayout的详细解释可以月度蓝色上old9的这篇<a href="http://www.blueidea.com/tech/site/2006/3698.asp">《On having layout》</a>(读来有些难懂，备忘一下，以后遇到相关实例可以回过头来重温，相信能有更深的认识)。
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
