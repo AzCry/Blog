@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>尝试使用Emmet语法</title>
+	<script src="http://s9.qhimg.com/!5fcea7b6/shCore.js"></script>
+	<script src="http://s6.qhimg.com/!d2db457d/shBrushXml.js"></script>
+	<script src="http://s7.qhimg.com/!5fcea7b6/shBrushJScript.js"></script>
+	<script src="http://s0.qhimg.com/!5af03491/shBrushCss.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://s7.qhimg.com/!7827f968/shCoreEmacs.css">
+	<link rel="stylesheet" type="text/css" href="http://s8.qhimg.com/!7827f968/shThemeEmacs.css">
+	<style>
+		body {
+			background: #f5f5d5;
+		}
+		.title {
+			text-align: center;
+		}
+		.content {
+			width: 1000px;
+			margin: 0 auto;
+		}
+		.content p {
+			text-indent: 2em;
+		}
+		.code-hightlight {
+			padding-left: 2em;
+		}
+		.btn-back {
+			position:absolute;
+			top: 0.67em;
+			left: 0.67em
+		}
+	</style>
+</head>
+<body>
+<div class="main">
+	<div class="content">
+		<div class="title">
+			<h1>尝试使用Emmet语法</h1>
+		</div>
+		<p>尝试了一下Emmet的语法，发现还是很强大的。所以决定使用Emmet写这篇博客，记录下常用用法，以后也要坚持使用。</p>
+		<p>html代码缩写:</p>
+		<ul>
+			<li><strong>初始化:</strong>!或html:5</li>
+			<li><strong>添加类,id,文本,属性:</strong>.item #item {text} [href="http://image.so.com"]</li>
+			<li><strong>嵌套:</strong>&gt; + ^</li>
+			<li><strong>分组:</strong>(.header>h1)+(.content>p)+(.footer>p)</li>
+			<li><strong>隐式标签:</strong>.item</li>
+			<li><strong>多个元素:</strong>ul>.item*5</li>
+		</ul>
+		<p>CSS缩写:</p>
+		<ul>
+			<li><strong>常用属性:</strong>w200+h100+m20</li>
+			<li><strong>供应商兼容代码:</strong>trs</li>
+			<li><strong>渐变:</strong>lg(left,#fff 50%,#000)</li>
+		</ul>
+		<p>附加功能:</p>
+		<ul>
+			<li><strong>Lorem:</strong>lorem</li>
+		</ul>
+	</div>
+</div>
+<div class="btn-back">
+<a href="../blog.html">&lt;返回列表</a>
+</div>
+<script>
+     SyntaxHighlighter.all()
+</script>
+</body>
+</html>
